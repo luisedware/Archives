@@ -1,4 +1,12 @@
-# 新增首页管理控制器
+![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# 本文目标
+
+***
+
+初步搭建好后台管理功能的界面
+
+# 新增控制器
 
 ***
 

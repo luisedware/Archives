@@ -1,4 +1,12 @@
-## 新增验证请求
+![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# 本文目标
+
+***
+
+新增用户管理模块功能
+
+# 新增验证请求
 ***
 在终端执行以下命令，在文件夹`app/Http/Requests/Form`下新增表单验证`UserForm`
 ```
@@ -53,7 +61,7 @@ class UserForm extends Request
 }
 ```
 
-## 新增控制器UserController
+# 新增控制器UserController
 
 ***
 
@@ -193,7 +201,7 @@ class UserController extends Controller
 
 ```
 
-## 新增路由
+# 新增路由
 
 ***
 
@@ -205,7 +213,7 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth']], function () {
 });
 ```
 
-## 新增视图
+# 新增视图
 
 ***
 
@@ -463,6 +471,6 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth']], function () {
 </div>
 ```
 完成上述步骤后，就已成功构建好用户管理模块了，界面效果图如下：
-![屏幕快照 2016-02-18 10.41.31.png](http://upload-images.jianshu.io/upload_images/1277229-6ba87606c5bba041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![屏幕快照 2016-02-18 10.41.35.png](http://upload-images.jianshu.io/upload_images/1277229-1618046381a4e8e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![屏幕快照 2016-02-18 10.41.39.png](http://upload-images.jianshu.io/upload_images/1277229-730ef28aa8a30f20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![图一.png](http://upload-images.jianshu.io/upload_images/1277229-6ba87606c5bba041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![图二.png](http://upload-images.jianshu.io/upload_images/1277229-1618046381a4e8e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![图三.png](http://upload-images.jianshu.io/upload_images/1277229-730ef28aa8a30f20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

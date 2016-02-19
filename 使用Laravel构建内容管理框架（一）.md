@@ -1,3 +1,10 @@
+
+![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+# 本文目标
+
+***
+为使用Laravel构建内容管理框架做好环境、代码和脚本的准备
+
 # 安装Laravel
 
 ***
@@ -165,4 +172,4 @@ gulp copy
 gulp
 ```
 
-上述操作将会在根目录文件夹`public/assets/`生成所需的前端资源，接下来就是在模板中使用。
+上述操作将会在根目录文件夹`public/assets/`生成所需的前端资源，接下来就是在视图模板中使用。

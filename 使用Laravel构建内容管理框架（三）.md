@@ -1,3 +1,11 @@
+![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+# 本文目标
+
+*** 
+
+完成登录管理页面与登录验证功能
+
 # 管理用户模型
 
 ***
