@@ -1,8 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-# 本文目标
-
-*** 
+---
+title: 使用 Laravel 构建内容管理框架（三）
+date: 2016-04-04 09:33:12
+tags: Laravel
+category: PHP
+---
 
 完成登录管理页面与登录验证功能
 
@@ -252,7 +253,3 @@ protected $redirectAfterLogout = '/';
     return $next($request);
 }
 ```
-
-# 效果预览
-完成上述步骤后，在浏览器输入项目域名/auth/login，可以看到效果如下：
-![屏幕快照 2016-02-18 11.38.16.png](http://upload-images.jianshu.io/upload_images/1277229-7733789649e84078.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

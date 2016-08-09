@@ -1,7 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（六）
+date: 2016-04-04 09:33:28
+tags: Laravel
+category: PHP
+---
 
 完成Entrust的配置
 
@@ -130,7 +132,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
-{   
+{
     use Authenticatable, Authorizable, CanResetPassword, EntrustUserTrait{
         Authorizable::can insteadof  EntrustUserTrait;
         EntrustUserTrait::can as hasPermission;

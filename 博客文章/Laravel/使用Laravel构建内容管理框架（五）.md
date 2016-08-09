@@ -1,7 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（五）
+date: 2016-04-04 09:33:22
+tags: Laravel
+category: PHP
+---
 
 新增菜单管理模块功能，完成侧边栏菜单视图显示
 
@@ -729,6 +731,4 @@ Route::group(['namespace' => 'Auth'], function () {
 
 完成上述操作后，便可以在每个视图都能看到共享的侧边栏菜单数据
 
-# 效果预览
-![屏幕快照 2016-02-19 11.31.53.png](http://upload-images.jianshu.io/upload_images/1277229-30980ef652d82296.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![屏幕快照 2016-02-19 11.31.48.png](http://upload-images.jianshu.io/upload_images/1277229-4db68c2f7ab2d7c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+

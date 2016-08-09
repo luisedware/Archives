@@ -1,8 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（二）
+date: 2016-04-04 09:32:57
+tags: Laravel
+category: PHP
+---
 
 初步搭建好后台管理功能的界面
 
@@ -61,7 +62,7 @@ class IndexController extends Controller
 
 # 新增路由
 
-*** 
+***
 
 打开文件`app\Http\routes.php`，修改代码如下：
 ```
@@ -360,9 +361,4 @@ Route::group(['namespace'=>'Backend'],function(){
 @endsection
 ```
 
-# 效果预览
 
-***
-
-接着在浏览器输入项目地址/index，可以看到界面如下：
-![屏幕快照 2016-02-18 11.12.01.png](http://upload-images.jianshu.io/upload_images/1277229-8c029a79464b9ff8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

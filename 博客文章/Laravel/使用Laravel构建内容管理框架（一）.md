@@ -1,9 +1,11 @@
+---
+title: 使用 Laravel 构建内容管理框架（一）
+date: 2016-03-09 20:54:07
+tags: Laravel
+category: PHP
+---
 
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
-
-***
-为使用Laravel构建内容管理框架做好环境、代码和脚本的准备
+为使用 Laravel 构建内容管理框架做好环境、代码和脚本的准备
 
 # 安装Laravel
 

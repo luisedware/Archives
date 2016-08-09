@@ -1,7 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（八）
+date: 2016-04-04 09:33:41
+tags: Laravel
+category: PHP
+---
 
 新增权限管理模块，管理权限的增删查改。
 
@@ -493,8 +495,3 @@ class PermissionTableSeeder extends Seeder
 php artisan migrate:refresh --seed
 ```
 
-# 效果预览
-
-***
-
-![屏幕快照 2016-02-22 09.50.45.png](http://upload-images.jianshu.io/upload_images/1277229-465b839dd3946f01.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

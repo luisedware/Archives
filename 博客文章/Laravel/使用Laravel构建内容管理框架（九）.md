@@ -1,9 +1,11 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
+---
+title: 使用 Laravel 构建内容管理框架（九）
+date: 2016-04-04 09:33:49
+tags: Laravel
+category: PHP
+---
 
-***
-
-利用Entrust Package进行权限管理
+利用 `zizaco/entrust` Package 进行权限管理
 
 # 修改用户表单请求
 
@@ -719,8 +721,3 @@ Route::group(['namespace' => 'Auth'], function () {
 
 凡是进行后台访问、操作的路由，都必须经过`Entrust`中间件进行权限验证。当前登录用户对应的角色没有权限，则无法查看页面或进行数据操作
 
-# 效果预览
-
-***
-
-![屏幕快照 2016-02-22 16.06.07.png](http://upload-images.jianshu.io/upload_images/1277229-ab1fcafc9e4e84e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

@@ -1,8 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（四）
+date: 2016-04-04 09:33:17
+tags: Laravel
+category: PHP
+---
 
 新增用户管理模块功能
 
@@ -470,7 +471,3 @@ Route::group(['namespace' => 'Backend', 'middleware' => ['auth']], function () {
     </form>
 </div>
 ```
-完成上述步骤后，就已成功构建好用户管理模块了，界面效果图如下：
-![图一.png](http://upload-images.jianshu.io/upload_images/1277229-6ba87606c5bba041.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![图二.png](http://upload-images.jianshu.io/upload_images/1277229-1618046381a4e8e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![图三.png](http://upload-images.jianshu.io/upload_images/1277229-730ef28aa8a30f20.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

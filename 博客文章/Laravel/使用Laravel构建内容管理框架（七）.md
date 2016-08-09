@@ -1,7 +1,9 @@
-![Happy Coding](http://upload-images.jianshu.io/upload_images/1277229-a09205aecddd5bf8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-# 本文目标
-
-***
+---
+title: 使用 Laravel 构建内容管理框架（七）
+date: 2016-04-04 09:33:36
+tags: Laravel
+category: PHP
+---
 
 新增角色管理模块，管理角色的增删查改。
 
@@ -471,8 +473,4 @@ class RoleTableSeeder extends Seeder{
 php artisan migrate:refresh --seed
 ```
 
-# 效果预览
 
-***
-
-![屏幕快照 2016-02-19 17.19.36.png](http://upload-images.jianshu.io/upload_images/1277229-33f4df310c1ecac8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
