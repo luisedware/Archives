@@ -1,0 +1,356 @@
+---
+title: 与 MySQL 的零距离接触（一）
+date: 2016-09-07 20:48:20
+tags: MySQL
+category: MySQL
+---
+
+## 第 1 章 初涉 MySQL
+
+- ### 1-1 MySQL概述
+	- MySQL 是由瑞典 MySQL AB 公司开发的，目前被 Oracle 公司收购了
+	- MySQL 是一款开源的关系型数据库管理系统
+	- MySQL 分为社区版和企业版
+- ### 1-2 MySQL的安装与配置
+	- Mac OS 使用 HomeBrew 安装：`brew install mysql`
+	- MySQL 目录结构：
+		- bin - 存储可执行文件
+		- lib - 存储库文件
+		- share - 存储错误消息和字符集文件
+		- scripts - 存储脚本文件
+		- include - 存储包含的头文件
+		- mysql-test
+		- support-files
+- ### 1-3 启动与停止MySQL服务
+	- 启动 MySQL 服务：`launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"`
+	- 停止 MySQL 服务：`launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"`
+- ### 1-4 登录与退出
+	- 登录
+		- `mysql` 命令
+			- -D, --database=[name] : 指定数据库
+			- -P, --port=[number] ： 指定端口号
+			- -u, --user=[name] ： 指定登录用户
+			- -h, --host=[name] ： 指定服务器
+			- -p, --password ： 密码
+			- -V, --version ：查看版本
+			- --delimiter=[name] ： 指定分隔符
+			- --prompt=[name] ： 设置提示符
+		- `mysql` 命令例子
+			- `mysql -uroot -p`
+			- `mysql --version`
+			- `mysql -uroot -P6606 -p`
+	- 退出
+		- `mysql` CLI 环境中输入
+			- exit;
+			- quit:
+			- \q;
+- ### 1-5 修改MySQL提示符
+	- 连接客户端时通过参数指定：`shell>mysql -uroot -proot --prompt 提示符`
+	- 连接上客户端后，通过设置 prompt 提示符指定：`prompt 提示符`
+	- `prompt` 提示符参数：
+		- \D 完整的日期
+		- \d 当前数据库
+		- \h 服务器名称
+		- \u 当前用户
+	- `prompt` 提示符参数用法：`prompt \h-\u-\p-\D`
+
+- ### 1-6 MySQL 常用命令以及语法规范
+	- 常用命令：
+		- 查看数据库版本 - `SELECT VERSION();`
+		- 查看数据库当前时间 - `SELECT NEW();`
+		- 查看数据库当前用户 - `SELECT USER();`
+		- 查看数据库列表 - `SHOW DATABASES;`
+		- 查看警告日志 - `SHOW WARINGS;`
+	- 语法规范：
+		- 关键字与函数名称全部大写
+		- 数据库名称、表名称、字段名称全部小写
+		- SQL 语句必须以分号结尾
+- ### 1-7 操作数据库
+
+	- 创建数据库 - `CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name [DEFAULT] CHARACTER SET [=] charset_name;`
+
+	- 修改数据库 - `ALTER {DATABASE | SCHEMA} [db_name] [DEFAULT] CHARACTER SET [=] charset_name; `
+
+	- 删除数据库 - `DROP {DATABASE | SCHEMA} [IF EXISTS] db_name`
+
+## 第 2 章 数据类型与操作数据表
+
+- ### 2-1 内容回顾
+	- 略
+- ### 2-2 数据类型之整型
+	- 数据类型的概念：数据类型是指列、存储过程参数、表达式和局部变量的数据特征，它决定了数据的存储格式，代表了不同的信息类型。
+	- 整型类型：
+		- `TINYINT`
+			- 有符号值：-128 ~ 127 （- 2）
+			- 无符号值：0 ~ 255
+			- 字节：1
+		- `SMALLINT`
+			- 有符号值：-32768 ~ 32767
+			- 无符号值：0 ~ 65535
+			- 字节：2
+		- `MEDIUMINT`
+			- 有符号值：-8388608 ~ 8388607
+			- 无符号值：0 ~ 16777215
+			- 字节：3
+		- `INT`
+			- 有符号值：-2147483648 ~ 2147483647
+			- 无符号值：0 ~ 4294967295
+			- 字节：4
+		- `BIGINT`
+			- 有符号值：-9223372036854775808 ~ 9223372036854775807
+			- 无符号值：0 ~ 18446744073709551615
+			- 字节：8
+- ### 2-3 数据类型之浮点型
+	- `FLOAT` [(M,D)]：M 是数字总位数，D 是小数点后面的位数。如果 M 和 D 被省略，根据硬件允许的限制来保存值。单精度浮点数精确到大约 7 位小数位。
+	- `DOUBLE` [(M,D)]
+- ### 2-4 数据类型之日期时间型
+	- `YEAR`
+	- `TIME`
+	- `DATE`
+	- `DATETIME`
+	- `TIMESTAMP`
+- ### 2-5 数据类型之字符型
+	 - `CHAR`：M 个字节，0 <= M <= 255
+	 - `VARCHAR`：L + 1 个字节，其中 L <= M 且 0 <= M <= 65535
+	 - `TINYTEXT`：L + 1 个字节，其中 L < 2^8
+	 - `TEXT`：L + 2 个字节，其中 L < 2^16
+	 - `MEDIUMTEXT`：L + 3 个字节，其中 L < 2^24
+	 - `LONGTEXT`：L + 4 个字节，其中 L < 2^32
+	 - `ENUM`('value1','value2',...)：1 或 2 个字节，取决于枚举值的个数（最多 65535 个值）
+	 - `SET`('value1','value2',...)：1、2、3、4 或者 8 个字节，取决于 set 成员的数目（最多64个）
+- ### 2-6 创建数据表
+	- 数据表概念：数据表是数据库最重要的组成部分一直，是其他对象的基础。
+	- 选择数据库 - `use {database}`
+	- 创建数据表 - `CREATE TABLE [IF NOT EXISTS] table_name(column_name data_type,....)`
+- ### 2-7 查看数据表：
+	- `SHOW TABLES [FROM db_name] [LIKE 'pattern'|WHERE expr]`
+- ### 2-8 查看数据表结构：
+	- `SHOW COLUMNS FROM tbl_name`
+- ### 2-9 记录的插入与查找：
+	- 插入：`INSERT [INTO] tal_name[(col_name)VALUES(val,..)]`
+	- 插入省略字段需要为所有字段都要赋值，否则数据库报错
+	- 查找：`SELECT expr,... FROM tbl_name`
+- ### 2-10 空值与非空
+	- `NULL`，字段值可以为空
+	- `NOT NULL`，字段值禁止为空
+- ### 2-11 自动编号
+	- `AUTO_INCREMENT`，自动编号，且必须与主键组合使用
+	- 默认情况下，起始值为 1，每次的增量为 1
+- ### 2-12 初涉主键约束
+	- `PRIMARY KEY`
+		- 主键约束
+		- 主键自动为 NOT NULL
+		- 主键保证记录的唯一性
+		- 每张数据表只能存在一个主键
+		- `AUTO_INCREMENT` 必须和 `PRIMARY KEY` 一起使用，`PRIMARY KEY`  不必须和 `AUTO_INCREMENT` 一起使用
+- ### 2-13 初涉唯一约束
+	- `UNIQUE KEY`
+		- 唯一约束
+		- 唯约束可以保证记录的唯一性
+		- 唯一约束的字段可以为空值（NULL）
+		- 每张数据表可以存在多个唯一索引
+- ### 2-14 初涉默认约束
+	- `DEFAULT`
+		- 默认值
+		- 当插入记录时，如果没有明确为字段赋值，则自动赋予默认值
+
+## 第 3 章 约束以及修改数据表
+- ### 3-1 回顾和概述
+	- 略
+- ### 3-2 外键约束的要求解析
+	- 约束
+		- 约束保证数据的完整性和一致性
+		- 约束分为表级约束和列级约束
+		- 约束类型：
+			- `DEFAULT`（默认约束）
+			- `NOT NULL`（非空约束）
+			- `UNIQUE KEY`（唯一约束）
+			- `PRIMARY KEY`（主键约束）
+			- `FOREIGN KEY`（外键约束）
+		- FOREIGN KEY - 外键约束
+			- 保持数据一致性，完整性
+			- 实现一对一或一对多关系
+		- 使用外键约束的要求
+			- 父表和子表必须使用相同的存储引擎，而且禁止使用临时表
+			- 数据表的存储引擎只能为 InnoDB
+			- 外键列和参照列必须具有相似的数据类型。其中数字的长度或是是否有符号位必须相同；而字符的长度则可以不同
+			- 外键列和参照列必须创建索引，如果参照列不存在索引的话，MySQL 将自动创建索引
+		- 编辑数据表的默认存储引擎：`default-storage-engine=INNODB`
+
+- ### 3-3 外键约束的参照操作
+	- `CASCADE`：从父表删除或更新且自动删除或更新子表中匹配的行
+	- `SET NULL`：从父表删除或更新行，并设置子表中的外键列为 NULL。如果使用该选项，必须保证子表列没有指定 NOT NULL
+	- `RESTRICT`：拒绝对父表的删除或更新操作
+	- `NO ACTION`：标准 SQL 的关键字，在 MySQL 中与 RESTRICE 相同
+- ### 3-4 表级约束与列级约束
+	- 对一个数据列建立的约束，称为列级约束
+	- 对多个数据列建立的约束，称为表级约束
+	- 列级约束既可以在列定义时声明，也可以在列定义后声明
+	- 表级约束只能在列定义后声明
+- ### 3-5 修改数据表-添加/删除列
+	- 添加单列：`ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST | AFTER col_name]`
+	- 添加多列：`ALTER TABLE tbl_name ADD [COLUMN] (col_name column_definition,...)`
+	- 删除单列：`ALTER TABLE tbl_name DROP [COLUMN] col_name`
+- ### 3-6 修改数据表--添加约束
+	- 添加主键约束：`ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] PRIMARY KEY [index_type](index_col_name,...)`
+	- 添加唯一约束：`ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] UNIQUE [INDEX|KEY][index_name][index_type](index_col_name,...)`
+	- 添加外键约束：`ALTER TABLE tbl_name ADD [CONSTRAINT [symbol]] FOREIGN KEY [index_name](index_col_name,...) reference_definition`
+	- 添加/删除默认约束：`ALTER TABLE tbl_name ALTER [COLUMN] col_name {SET DEFAULT literal | DROP DEFAULT}`
+- ### 3-7 修改数据表--删除约束
+	- 删除主键约束：`ALTER TABLE tbl_name DROP PRIMARY KEY`
+	- 删除唯一约束：`ALTER TABLE tbl_name DROP {INDEX | KEY} index_name`
+	- 删除外键约束：`ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol`
+- ### 3-8 修改数据表--修改列定义和更名数据表
+	- 修改表名称
+		- `ALTER TABLE tbl_name RENAME [TO|AS] new_tbl_name`
+		- `RENAME TABLE tbl_name TO new_tbl_name [,tbl_name2 To ewn_tbl_name2,...]`
+	- 修改列定义：`ALTER TABLE tbl_name MODIFY [COLUMN] col_name column_definition [FIRST | AFTER col_name]`
+	- 修改列名称：`ALTER TABLE tbl_name CHANGE [COLUMN] old_col_name new_col_name column_definition [FIRST|AFTER col_name]`
+- ### 3-9 小结
+	- 约束
+		- 功能
+			- `NOT NULL`（非空约束）
+			- `PRIMARY KEY`（主键约束）
+			- `UNIQUE KEY`（唯一约束）
+			- `DEFAULT`（默认约束）
+			- `FOREIGN KEY`（外键约束）
+		- 数据列的数目
+			- 表级约束
+			- 列级约束
+	- 修改数据表
+		- 针对字段的操作：添加 / 删除字段、修改列定义，修改列名称等
+		- 针对约束的操作：添加 / 删除各种约束
+		- 针对数据表的操作：数据表更名（两种方式）
+
+## 第 4 章 操作数据表中的记录
+
+- ### 4-1 回顾和概述
+	- 略
+- ### 4-2 插入记录 `INSERT`
+	- INSERT
+		- `INSERT [INFO] tbl_name [(col_name,...)] {VALUES | VALUE}({expr|DEFAULT},...),(...)`
+- ### 4-3 插入记录 `INSERT SET-SELECT`
+	- INSERT SET 与 INSERT 的区别在于，此方法可以使用子查询（SubQuery）
+		- `INSERT [INTO] tbl_name SET col_name={expr | DEFAULT},...`
+	- INSERT SELECT 与 INSERT 的区别在于，此方法可以将查询结果插入到指定数据表
+		- `INSERT [INTO] tbl_name [(col_name,...)] SELECT ...`
+- ### 4-4 单表更新记录 UPDATE
+	- `UPDATE`
+		- `UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr | DEFAULT}[,col_name2={expr2|DEFAULT}]...[WHERE where_condition]`
+- ### 4-5 单表删除记录 DELETE
+	- `DELETE`
+		- `DELETE FROM tbl_name [WHERE where_condition]`
+- ### 4-6 查询表达式解析
+	- `SELECT`
+		- `SELECT select_expr[,select_expr ...]`
+		- `[`
+			- `FROM table_references`
+			- `[WHERE where_condition]`
+			- `[GROUP BY {col_name | position} [ASC | DESC], ...]`
+			- `[HAVING where_condition]`
+			- `[ORDER BY {col_name | expr | position} [ASC | DESC],...]`
+			- `[LIMIT {[offset,] row_count | row_count OFFSET offset}]`
+		- `]`
+	- select_expr - 查询表达式
+		- 每一个表达式表示想要的一列，必须有至少一个。
+		- 多个列之间以英文逗号分隔
+		- 星号（*）表示所有列。tbl_name.* 可以表示命名表的所有列
+		- 查询表达式可以使用 `[ AS ]` alias_name 为其赋予别名
+		- 别名可用于 `GROUP BY`，`ORDER BY` 或 `HAVING` 子句
+- ### 4-7 `WHERE` 语句进行条件查询
+	- `WHERE` - 条件表达式
+		- 对记录进行过滤，如果没有指定 `WHERE` 子句，则显示所有记录
+		- 在 `WHERE` 表达式中，可以使用 MySQL 支持的函数或者运算符
+- ### 4-8 `GROUP BY` 语句对查询结果分组
+	- `[GROUP BY {col_name | position} [ASC | DESC], ...]`
+- ### 4-9 `HAVING` 语句设置分组条件
+	- `[HAVING where_condition]`
+	- 请使用聚合函数或 select_column，否则报错
+- ### 4-10 `ORDER BY` 语句对查询结果排序
+	- `[ORDER BY {col_name | expr | position} [ASC | DESC],...]`
+- ### 4-11 `LIMIT` 语句限制查询数量
+	- `[LIMIT {[offset,] row_count | row_count OFFSET offset}]`
+	- 想要获取第三、第四条记录，写法是 `LIMIT 2 OFFSET 2`
+- ### 4-12 小结
+	- 略
+
+## 第 5 章 子查询与连接
+
+- ### 5-1 数据准备
+	- 数据可以在「资料下载」栏目中获取
+- ### 5-2 子查询简介
+	- 简介
+		- 子查询（Subquery）是指出现在其他 SQL 语句内的 SELECT 子句
+		- 子查询指嵌套在查询内部，且必须始终出现在圆括号内
+		- 子查询可以包含多个关键字或条件，如 DISTINCT、GROUP BY、ORDER BY、LIMIT、函数等
+		- 子查询的外层查询可以：SELECT、INSERT、UPDATE、SET、DO 等
+		- 子查询可以返回标量、一行、一列或子查询
+	- 例子
+		- `SELECT * FROM t1 WHERE col1 = (SELECT col2 FROM t2)`;
+			- 其中 `SELECT * FROM t1`，称为 Outer Query / Outer Statement
+			- `SELECT col2 FROM t2`，称为 SubQuery
+- ### 5-3 由比较运算符引发的子查询
+	- 使用比较运算符的子查询：=，>，<，>=，<=，<>，!=，<=>
+	- 语法结构：operand comparison_operator subquery
+	- 比较运算符
+		- operand comparison_operator ANY(subquery)
+			- \>、>= 最小值
+			- <、<= 最大值
+			- =     任意值
+			- <>、!=
+		- operand comparison_operator ALL(subquery)
+			- \>、>= 最大值
+			- <、<= 最小值
+			- =
+			- <>、!=	任意值
+		- operand comparison_operator SOME(subquery)
+			- \>、>= 最小值
+			- <、<= 最大值
+			- =     任意值
+			- <>、!=
+- ### 5-4 由[NOT] IN/EXISTS引发的子查询
+	- 语法结构：operand comparison_operator [NOT] IN (subquery)
+		- =ANY 运算符与 IN 等效
+		- !=ALL 或 <>ALL 运算符与 NOT IN 等效
+	- 语法结构：operand comparison_operator [NOT] EXISTS
+		- 如果子查询返回任何行，EXISTE 将返回 TRUE，否则为 FALSE
+- ### 5-5 使用INSERT...SELECT插入记录
+	- INSERT..SELECT
+		- 将查询结果写入数据表：`INSERT [INTO] tbl_name [(col_name)] SELECT...`
+- ### 5-6 多表更新
+	- `UPDATE table_references`
+	- `SET col_name1={expr1|DEFAULT}`
+	- `[,col_name2={expr2|DEFAULT}]`
+	- `[WHERE where_condition]`
+- ### 5-7 多表更新之一步到位
+	- CREATE...SELECT
+		- 创建数据表同时将查询结果写入到数据表：`CREATE TABLE [IF NOT EXISTS] tbl_name [(create_definition,...)] select_statement`
+- ### 5-8 连接的语法结构
+	- 连接
+		- MySQL 在 SELECT 语句、多表更新、多表删除语句中支持 JOIN 操作
+		- 语法结构
+			- `table_reference` - 数据表参照
+				- `tbl_name [[AS] alias] | table_subquery [AS] alias`
+					- 数据表可以使用 tbl_name As alias_name 或 tbl_name alias_name 赋予别名
+					- table_subquery 可以作为子查询使用在 FROM 子句中，这样的子查询必须为其赋予别名
+			- `{[INNER | CROSS] JOIN | {LEFT | RIGHT} [OUTER] JOIN}`
+			- `table_reference`
+			- `ON conditional_expr`
+- ### 5-9 内连接 INNER JOIN
+- ### 5-10 外连接 OUTER JOIN
+	- LEFT JOIN
+	- RIGHT JOIN
+- ### 5-11 多表连接
+	- 略
+- ### 5-12 关于连接的几点说明
+	- 外连接
+		- A LEFT JOIN B join_condtion
+			- 数据表 B 的结果集依赖数据表 A
+			- 数据表 A 的结果集根据左连接条件依赖所有数据表
+			- 左外连接条件决定如何检索数据表 B
+			- 如果数据表 A 的某条记录符合 WHERE 条件，但是在数据表 B 不存在，符合连接条件的记录，将生成一个所有列为空的额外的行
+- ### 5-13 无限级分类表设计
+	- 略
+- ### 5-14 多表删除
+	- `DELETE tbl_name[.*] [,tbl_name[.*]] ... FROM table_references [WHERE where_condition]`
+
