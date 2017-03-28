@@ -125,13 +125,11 @@ MySQL 5.7 之后
 
 ### 4-1 不再支持old_password认证
 
-
-
 ### 4-2 增加账号默认过期时间
 
 `show variables like 'default_password_lifetime';`
 
 ### 4-3 加强了对账号的管理功能
 
-### 4-4 增加了sys管理数据库
+### 4-4 增加了 sys 管理数据库
 

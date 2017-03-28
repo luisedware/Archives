@@ -90,7 +90,7 @@ enabled=1
 
 更新 yum 源
 ```
-yum udpate
+yum update
 ```
 
 安装 Nginx
@@ -173,7 +173,7 @@ yum remove php* php-common
 ```
 wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
-rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
+rpm -Uvh https://mirror.webtatic.com/yum/el6/latest.rpm
 ```
 
 安装 PHP 7
@@ -263,7 +263,6 @@ gfortran --version
 
 ### 安装 Redis
 ```
-rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 yum --enablerepo=remi,remi-test install redis
 ```
@@ -287,15 +286,14 @@ server{
     listen 80;
     server_name www.cowcat.cc;
 
-    root /www/CowCat/public;
-    index index.php index.html index.htm;
-
     # 日志记录
     access_log  /var/log/nginx/cowcat.cc.access.log  main;
     error_log /var/log/nginx/cowcat.cc.error.log;
 
     location / {
+        root /data/www/cowcat/public;
         try_files $uri $uri/ /index.php?$query_string;
+        index index.php index.html index.htm;
     }
 
     # 错误页面
@@ -305,8 +303,9 @@ server{
         root   /usr/share/nginx/html;
     }
 
-    #PHP 脚本请求全部转发到 FastCGI处理. 使用FastCGI默认配置.
+    #PHP 脚本请求全部转发到 FastCGI 处理. 使用 FastCGI 默认配置.
     location ~ \.php$ {
+        root /data/www/cowcat/public;
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
@@ -314,5 +313,3 @@ server{
     }
 }
 ```
-
-##
